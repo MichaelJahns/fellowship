@@ -1,4 +1,4 @@
-package com.fellowship.Fellowship;
+package com.fellowship;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
