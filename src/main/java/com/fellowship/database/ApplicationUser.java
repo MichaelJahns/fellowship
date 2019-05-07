@@ -20,7 +20,7 @@ public class ApplicationUser implements UserDetails {
     private String username;
     private String password;
     private String firstName;
-    private char lastInitial;
+    private String lastInitial;
     private String statementOfPurpose;
 
     //Getters
@@ -38,6 +38,10 @@ public class ApplicationUser implements UserDetails {
         return this.username;
     }
 
+    public String getStatementOfPurpose() {
+        return statementOfPurpose;
+    }
+
     //Setters
     public void setUsername(String username) {
         this.username = username;
@@ -51,7 +55,7 @@ public class ApplicationUser implements UserDetails {
         this.firstName = firstName;
     }
 
-    public void setLastInital(char initial) {
+    public void setLastInital(String initial) {
         this.lastInitial = initial;
     }
 
@@ -84,5 +88,7 @@ public class ApplicationUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }
 

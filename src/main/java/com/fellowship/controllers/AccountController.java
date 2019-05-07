@@ -28,12 +28,12 @@ public class AccountController {
             @RequestParam String username,
             @RequestParam String password,
             @RequestParam String firstName,
-            @RequestParam char lastInitial,
+            @RequestParam String lastInitial,
             @RequestParam String statementOfPurpose
     ) {
         ApplicationUser user = new ApplicationUser();
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(encoder.encode(password));
         user.setFirstName(firstName);
         user.setLastInital(lastInitial);
         user.setStatementOfPurpose(statementOfPurpose);
