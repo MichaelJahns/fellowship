@@ -3,14 +3,16 @@
 <head>
     <title>Sign up!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <div th:replace="~{common :: header}"></div>
+
 </head>
 <body>
+<nav th:replace="~{common :: navbar}"></nav>
 <div>
     <form action="/signup" method="post">
         <input type="text" name="username" required placeholder="Username"/>
         <input type="password" name="password" required placeholder="Password"/>
         <input type="text" name="firstName" required placeholder="First Name"/>
-        <input type="text" name="lastInitial" required placeholder="Last Initial"/>
         <input type="text" name="statementOfPurpose" required placeholder="Statement of Purpose"/>
 
         <button type="submit">Submit</button>

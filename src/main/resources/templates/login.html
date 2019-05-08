@@ -1,10 +1,13 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Log in</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <div th:replace="~{common :: header}"></div>
+
 </head>
 <body>
+<nav th:replace="~{common :: navbar}"></nav>
 <div>
     <form action="/perform_login" method="post">
         <input type="text" name="username" required placeholder="Username"/>

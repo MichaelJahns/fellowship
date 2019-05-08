@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Fellows</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <div th:replace="~{common :: header}"></div>
+
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="~{common :: navbar}"></nav>
+
+<table id="fellow">
+    <thead>
+    <tr>
+        <th>User Id</th>
+        <th>First Name</th>
+        <th>Statement of Purpose</th>
+    </tr>
+    </thead>
+
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"/>
+        <td th:text="${user.firstName}"/>
+        <td th:text="${user.statementOfPurpose}"/>
+    </tr>
+</table>
+</body>
+</html>

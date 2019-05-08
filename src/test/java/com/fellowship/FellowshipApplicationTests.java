@@ -30,9 +30,8 @@ public class FellowshipApplicationTests {
     public void testAccountCreation() {
         ApplicationUser Jeff = new ApplicationUser();
         Jeff.setUsername("Big B");
-        Jeff.setPassword("jeff");
+//        Jeff.setPassword("jeff");
         Jeff.setFirstName("Jeff");
-        Jeff.setLastInital("B");
         Jeff.setStatementOfPurpose("Own the world");
 
         assertEquals("Username unexpected", "Big B", Jeff.getUsername());

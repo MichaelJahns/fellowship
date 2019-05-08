@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> User </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <div th:replace="~{common :: header}"></div>
+
+</head>
+<body>
+<nav th:replace="~{common :: navbar}"></nav>
+
+<div>
+    <h2 th:text="${user.username}"> Username </h2>
+    <p th:text="${user.id}"> Id </p>
+    <h3 th:text="${user.firstName}"> Name</h3>
+</div>
+</body>
+</html>

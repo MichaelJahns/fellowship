@@ -2,12 +2,18 @@ package com.fellowship.controllers;
 
 import com.fellowship.database.ApplicationUser;
 import com.fellowship.database.ApplicationUserRepository;
+import com.fellowship.security.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AccountController {
@@ -24,23 +30,64 @@ public class AccountController {
     }
 
     @PostMapping("/signup")
-    public String signupFollowThrough(
+    public RedirectView signupFollowThrough(
             @RequestParam String username,
             @RequestParam String password,
             @RequestParam String firstName,
-            @RequestParam String lastInitial,
             @RequestParam String statementOfPurpose
     ) {
         ApplicationUser user = new ApplicationUser();
         user.setUsername(username);
-        user.setPassword(encoder.encode(password));
+        user.setPassword(this.encoder, password);
         user.setFirstName(firstName);
-        user.setLastInital(lastInitial);
         user.setStatementOfPurpose(statementOfPurpose);
+
+        // try Date dateJoined = new SimpleDateFormat(yyyy/MM/dd).parse(date)
+        //user.setDateJoined(date)
 
         appUserRepo.save(user);
 
-        //Auto login stretch goal
-        return "/login";
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                user,
+                null,
+                user.getAuthorities());
+
+        SecurityContextHolder.getContext().setAuthentication(token);
+
+        return new RedirectView("/feed");
     }
+
+    @GetMapping("/feed")
+    public String getUsers(Model model) {
+        List<ApplicationUser> users = this.appUserRepo.findAll();
+        model.addAttribute("users", users);
+
+        return "feed";
+    }
+
+    @GetMapping("/user/{id}")
+    public String getUser(
+            @PathVariable Long id,
+            Model model
+    ) {
+        Optional<ApplicationUser> foundUser = appUserRepo.findById(id);
+
+        if (foundUser.isPresent()) {
+            model.addAttribute("user", foundUser.get());
+            return "user";
+        }
+        throw new UserNotFoundException();
+    }
+
+    @GetMapping("/login")
+    public String getLogin() {
+        return "login";
+    }
+
+    @GetMapping("/login-error")
+    @ResponseBody
+    public String getLoginError() {
+        return "Unrecognized user or password";
+    }
+
 }

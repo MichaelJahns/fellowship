@@ -2,6 +2,7 @@ package com.fellowship.database;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,8 +21,9 @@ public class ApplicationUser implements UserDetails {
     private String username;
     private String password;
     private String firstName;
-    private String lastInitial;
     private String statementOfPurpose;
+
+    //private date dateJoined;
 
     //Getters
     public long getId() {
@@ -38,6 +40,10 @@ public class ApplicationUser implements UserDetails {
         return this.username;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
     public String getStatementOfPurpose() {
         return statementOfPurpose;
     }
@@ -47,16 +53,12 @@ public class ApplicationUser implements UserDetails {
         this.username = username;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(PasswordEncoder encoder, String password) {
+        this.password = encoder.encode(password);
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public void setLastInital(String initial) {
-        this.lastInitial = initial;
     }
 
     public void setStatementOfPurpose(String purpose) {
@@ -88,7 +90,6 @@ public class ApplicationUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 
 }
 
