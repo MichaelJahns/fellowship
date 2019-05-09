@@ -1,0 +1,30 @@
+#posts {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#posts td, #albums th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#posts img{
+min-height: 150px;
+min-width: 150px;
+max-height:150px;
+max-width: 150px;
+}
+
+#posts tr:nth-child(even){background-color: #929487;}
+
+#posts tr:hover {background-color: #DCFFFD;}
+
+#posts th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4B7F52;
+  color: white;
+}

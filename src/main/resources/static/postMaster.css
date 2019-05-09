@@ -1,0 +1,19 @@
+.postMaster{
+    text-align: center;
+    background-color: #eeeeee;
+    border: 2px solid #dddddd;
+    border-radius: 15px;
+}
+.postMaster input[type=text] {
+    width: 10%;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+/* probably just spend 30 min trying to get text to wrap in my
+post templatee */
+
+.postMaster input[type=text]:focus {
+    overflow-wrap: normal;
+    width: 60%;
+    height: 50px;
+}

@@ -4,11 +4,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -24,6 +23,13 @@ public class ApplicationUser implements UserDetails {
     private String statementOfPurpose;
 
     //private date dateJoined;
+
+    @OneToMany(mappedBy = "applicationUser")
+    private List<Post> posts;
+
+    public ApplicationUser() {
+        posts = new ArrayList<>();
+    }
 
     //Getters
     public long getId() {
@@ -91,5 +97,8 @@ public class ApplicationUser implements UserDetails {
         return true;
     }
 
+    public List<Post> getPosts() {
+        return posts;
+    }
 }
 

@@ -6,20 +6,30 @@
 <div th:fragment="header">
     <link th:href="@{/style.css}" rel="stylesheet"/>
     <link th:href="@{/navbar.css}" rel="stylesheet"/>
+    <link th:href="@{/postMaster.css}" rel="stylesheet"/>
+    <link th:href="@{/table.css}" rel="stylesheet"/>
 
 </div>
 
 <!-- nav bar fragment -->
 <nav th:fragment="navbar" class="navbar">
-    <a href="/">
-        <img src="C:\Users\jahns\Projects\java\fellowship\src\main\resources\static\assets\shield.png"
-             alt="Code Fellows Icon" href=""/>
-    </a>
-    <a href=""> Feed </a>
-    <a href="login"> Login </a>
-    <a href="signup"> Sign Up </a>
-    <a href="perform_logout"> Log Out</a>
+    <a href="/in/profile"> Profile</a>
+    <a href="/in/"> Feed </a>
+    <a href="/login"> Login </a>
+    <a href="/signup"> Sign Up </a>
+    <a href="/perform_logout"> Log Out</a>
 </nav>
+
+<!-- Post fragment-->
+<section th:fragment="postMaster" class="postMaster">
+    <label> <span th:text="${actor.firstName}"/>, would you like to make a post?</label>
+    <form action="/in/" method="post">
+        <input type="hidden" name="author" th:value="${actor.username}"/>
+        <input type="text" name="body" required placeholder="Write your post here...">
+        <button type="submit"> Post</button>
+    </form>
+
+</section>
 
 </body>
 </html>

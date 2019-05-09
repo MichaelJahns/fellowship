@@ -1,5 +1,12 @@
 .navbar{
+text-decoration: none;
 width : 100%;
 background-color: #cccccc
 outline: 2px red solid;
+margin-bottom: 20px;
+}
+.navbar a{
+text-decoration: none;
+color: #4B7F52;
+margin: 10px;
 }
