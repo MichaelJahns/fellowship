@@ -14,9 +14,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.view.RedirectView;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.Assert.assertEquals;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -38,35 +39,60 @@ public class testAccountController {
     }
 
     @Test
-    public void testUserLoads() throws Exception {
-        ApplicationUser user = new ApplicationUser();
-        user.setUsername("test");
-
-        appUserRepo.save(user);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/user/1"))
+    public void loginIntegration() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/login"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(Matchers.containsString("test")));
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(view().name("login"))
+                .andExpect(content().string(Matchers.containsString("Log in")));
     }
 
-//    @Test
-//    public void testUserCreation() {
-//        String data = accountController.getLoginError();
-//        assertEquals("Unrecognized user or password", data);
-//
-//        String result = accountController.signupFollowThrough(
-//                "Big B",
-//                "Real Money",
-//                "Jeff",
-//                "B",
-//                "Own the world"
-//        );
-//
-//        assertEquals("/login", result);
-//
-//        ApplicationUser user = appUserRepo.findByUsername("Big B");
-//
-//        assertEquals("Big B", user.getUsername());
-//    }
+    @Test
+    public void signupIntegration() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/signup"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(view().name("signup"))
+                .andExpect(content().string(Matchers.containsString("Submit")));
+    }
+
+    @Test
+    public void testGuestRedirection() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/in/"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(view().name("login"))
+                .andExpect(content().string(Matchers.containsString("Log in")));
+    }
+
+    @Test
+    public void landingIntegration() throws Exception {
+        //How do i test that a User must be logged in
+        //Principal?
+        mockMvc.perform(MockMvcRequestBuilders.get("/in/"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(view().name("feed"))
+                .andExpect(content().string(Matchers.containsString("By")))
+                .andExpect(content().string(Matchers.containsString("Post")));
+
+    }
+
+    @Test
+    public void testUserCreation() {
+        RedirectView result = accountController.signupFollowThrough(
+                "The Mad Titan",
+                "stones",
+                "Thanos",
+                "Perfect Balance"
+        );
+
+        RedirectView landing = new RedirectView("/in/");
+        assertEquals("user was not redirected as expected", landing.toString(), result.toString());
+
+        ApplicationUser user = appUserRepo.findByUsername("The Mad Titan");
+
+        assertEquals("The Mad Titan", user.getUsername());
+    }
 
 }

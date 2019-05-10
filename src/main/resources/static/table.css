@@ -1,30 +1,30 @@
-#posts {
+.table{
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
   margin-bottom: 20px;
 }
 
-#posts td, #albums th {
+.table td, #albums th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#posts img{
+.table img{
 min-height: 150px;
 min-width: 150px;
 max-height:150px;
 max-width: 150px;
 }
 
-#posts tr:nth-child(even){background-color: #929487;}
+.table tr:nth-child(even){background-color: #7DD181;}
 
-#posts tr:hover {background-color: #DCFFFD;}
+.table tr:hover {background-color: #DCFFFD;}
 
-#posts th {
+.table th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
+  text-align: center;
   background-color: #4B7F52;
   color: white;
 }

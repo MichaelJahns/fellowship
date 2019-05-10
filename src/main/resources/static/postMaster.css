@@ -1,11 +1,13 @@
 .postMaster{
     text-align: center;
-    background-color: #eeeeee;
+    background-color: #7DD181;
     border: 2px solid #dddddd;
     border-radius: 15px;
+    margin: 0px auto 30px auto;
+    width: 40%;
 }
 .postMaster input[type=text] {
-    width: 10%;
+    width: 22%;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
 }
@@ -13,7 +15,7 @@
 post templatee */
 
 .postMaster input[type=text]:focus {
-    overflow-wrap: normal;
+  word-wrap: break-word;
     width: 60%;
     height: 50px;
 }

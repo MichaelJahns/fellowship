@@ -20,16 +20,50 @@
     <a href="/perform_logout"> Log Out</a>
 </nav>
 
-<!-- Post fragment-->
+<!--Followers Fragment-->
+<table th:fragment="followers" class="table">
+    <thead>
+    <tr>
+        <th> Username</th>
+        <th> Purpose</th>
+    </tr>
+    </thead>
+
+    <tr th:each="follower : ${followers}">
+        <td th:text="${follower.username}"> Username</td>
+        <td th:text="${follower.statementOfPurpose}"> Purpose</td>
+    </tr>
+</table>
+
+<!-- Post Master fragment-->
 <section th:fragment="postMaster" class="postMaster">
-    <label> <span th:text="${actor.firstName}"/>, would you like to make a post?</label>
+    <label> Posting as <span th:text="${actor.firstName}"/> . . </label>
     <form action="/in/" method="post">
-        <input type="hidden" name="author" th:value="${actor.username}"/>
-        <input type="text" name="body" required placeholder="Write your post here...">
+        <div>
+            <input type="hidden" name="author" th:value="${actor.username}"/>
+            <input type="text" name="body" required placeholder="Blank post... ">
+        </div>
         <button type="submit"> Post</button>
     </form>
-
 </section>
+
+<!--Post Feed Fragment-->
+<table th:fragment="feed" class="table">
+    <thead>
+    <tr>
+        <th>By</th>
+        <th>Post</th>
+        <!--        <th>Date</th>-->
+    </tr>
+    </thead>
+
+    <tr th:each="post : ${posts}">
+        <td>
+            <a th:text="${post.applicationUser.username}" th:href="@{/in/profile/} + ${post.applicationUser.getId()}"/>
+        </td>
+        <td th:text="${post.body}"/>
+    </tr>
+</table>
 
 </body>
 </html>

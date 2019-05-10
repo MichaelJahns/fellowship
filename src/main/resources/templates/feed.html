@@ -8,23 +8,9 @@
     <title>Title</title>
 </head>
 <body>
-<nav th:replace="~{common :: navbar}"></nav>
-
-<table id="posts">
-    <thead>
-    <tr>
-        <th>Actor</th>
-        <th>Post</th>
-        <!--        <th>Date</th>-->
-    </tr>
-    </thead>
-
-    <tr th:each="post : ${posts}">
-        <td th:text="${post.applicationUser.username}"/>
-        <td th:text="${post.body}"/>
-    </tr>
-</table>
-
+<nav th:replace="~{common :: navbar}"/>
 <section th:replace="~{common :: postMaster}"></section>
+<table th:replace="~{common :: feed}"/>
+
 </body>
 </html>

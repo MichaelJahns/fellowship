@@ -35,7 +35,6 @@ public class AccountController {
                 return "redirect:/in/";
             }
         } catch (Exception E) {
-            System.out.println(E);
         }
         return "signup";
 
@@ -81,7 +80,6 @@ public class AccountController {
                 return "redirect:/in/";
             }
         } catch (Exception E) {
-            System.out.println(E);
         }
         return "login";
     }

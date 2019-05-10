@@ -16,20 +16,13 @@
     <h3>-<span th:text="${user.firstName}"> </span></h3>
 </div>
 
-<table id="posts">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Post</th>
-        <!--        <th>Date</th>-->
-    </tr>
-    </thead>
-
-    <tr th:each="post : ${posts}">
-        <td th:text="${post.applicationUser.username}"/>
-        <td th:text="${post.body}"/>
-    </tr>
-</table>
 <section th:replace="~{common :: postMaster}"></section>
+
+<div id="dashboard">
+    <table th:replace="~{common :: feed}"/>
+    <!--<nav th:replace="~{common :: followers}"></nav>-->
+
+</div>
+
 </body>
 </html>
